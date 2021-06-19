@@ -1,0 +1,35 @@
+@media (min-width: 1024px) {
+  table {
+    display: inline-table !important;
+  }
+
+  thead tr:not(:first-child) {
+    display: none;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  tbody tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: .5rem;
+  }
+
+  tbody tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: .5rem;
+  }
+
+  .max-column-width {
+    max-width: 15rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .max-column-width {
+    max-width: 20rem;
+  }
+}
+
+.max-w-92 {
+  max-width: 92%;
+}

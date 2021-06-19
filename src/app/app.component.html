@@ -1,0 +1,72 @@
+<header>
+  <h1 class="hidden">{{'sportsClubApp' | translate}}</h1>
+  <nav class="bg-gray-800">
+    <div class="px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-between h-16">
+        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex-shrink-0 flex items-center">
+            <a routerLink="/players">
+              <img alt="Workflow" class="block lg:hidden h-8 w-auto" src="./assets/favicon.ico">
+              <img alt="Workflow" class="hidden lg:block h-8 w-auto" src="./assets/favicon.ico">
+            </a>
+          </div>
+          <div class="hidden sm:block sm:ml-6">
+            <div class="flex space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a [routerLinkActive]="'bg-gray-900 text-white'" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-semibold"
+                 [routerLink]="['/players']">
+                {{'players' | translate}}
+              </a>
+              <a [routerLinkActive]="'bg-gray-900 text-white'" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-semibold"
+                 [routerLink]="['/addPlayer']">
+                {{'player.add' | translate}}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="group inline-block">
+          <a class="px-3 py-2 bg-gray-900 text-white rounded-lg flex items-center outline-none">
+            <span class="pr-1 font-semibold flex-1 text-sm">{{'language' | translate}}</span>
+            <svg class="fill-current h-4 w-4 transform group-hover:-rotate-180 transition duration-150 ease-in-out"
+                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+            </svg>
+          </a>
+
+          <ul
+            class="bg-gray-700 rounded-lg transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32 py-2 right-0 left-auto">
+            <li (click)="switchLang(language)" *ngFor="let language of translate.getLangs()" [value]="language"
+                class="text-white text-sm px-3 py-1 hover:bg-gray-900 select-none">
+              {{language | translate}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a [routerLinkActive]="'bg-gray-900 text-white'" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-semibold"
+           routerLink="/players">
+          {{'players' | translate}}
+        </a>
+        <a [routerLinkActive]="'bg-gray-900 text-white'" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-semibold"
+           routerLink="/addPlayer">
+          {{'player.add' | translate}}
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="flex-grow mx-3 mt-2">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="bg-gray-800 text-white p-2">
+  <p>IP Minor - Alexandre Vryghem</p>
+</footer>

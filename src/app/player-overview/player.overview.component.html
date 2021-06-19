@@ -1,0 +1,107 @@
+<h2 class="text-2xl mb-3">{{'players' | translate}}</h2>
+<div>
+  <div class="mx-5 mb-3">
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="age">
+      {{'age' | translate}}:
+    </label>
+    <div class="flex">
+      <input [(ngModel)]="age" class="appearance-none block bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white h-9" id="age" name="age" placeholder="{{'age' | translate}}"
+             type="number">
+      <button (click)="searchAge()" class="bg-blue-600 rounded-lg text-white pt-1 pb-2 px-3 ml-2 h-9">
+        <i aria-hidden="true" class="fa fa-search"></i>
+      </button>
+      <button (click)="resetSearch()" class="bg-red-600 rounded-lg text-white pt-1 pb-2 px-3 ml-2 h-9">
+        <i aria-hidden="true" class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mx-5 mb-3">
+    <div class="flex flex-wrap">
+      <div>
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 w-60" for="firstName">
+          {{'firstName' | translate}}:
+        </label>
+        <input [(ngModel)]="firstName" class="appearance-none block bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white h-9 mr-2" id="firstName" name="firstName"
+               placeholder="{{'firstName' | translate}}"
+               type="text">
+      </div>
+      <div>
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="lastName">
+          {{'lastName' | translate}}:
+        </label>
+        <div class="flex">
+          <input [(ngModel)]="lastName" class="appearance-none block bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white h-9 mr-2" id="lastName" name="lastName"
+                 placeholder="{{'lastName' | translate}}"
+                 type="text">
+          <button (click)="searchName()" class="bg-blue-600 rounded-lg text-white pt-1 pb-2 px-3 h-9 mr-2">
+            <i aria-hidden="true" class="fa fa-search"></i>
+          </button>
+          <button (click)="resetSearch()" class="bg-red-600 rounded-lg text-white pt-1 pb-2 px-3 h-9">
+            <i aria-hidden="true" class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 *ngIf="players == undefined || players.length == 0" class="mx-8">{{'noPlayersSelected' | translate}}</h3>
+<div *ngIf="players != undefined && players.length != 0" class="py-2 mx-5 align-middle inline-block max-w-92">
+  <table
+    class="w-full flex flex-row flex-no-wrap lg:bg-white rounded-lg overflow-hidden lg:shadow-lg my-5 overflow-x-auto">
+    <thead class="text-white">
+    <tr *ngFor="let player of players"
+        class="text-base flex flex-col flex-no wrap lg:table-row rounded-l-lg sm:rounded-none mb-2 lg:mb-0">
+      <th
+        class="px-6 py-3 text-left bg-gray-700 border-gray-600 border-b-2 lg:text-xs font-bold text-white uppercase whitespace-pre rounded-tl-lg">
+        {{'firstName' | translate}}
+      </th>
+      <th
+        class="px-6 py-3 text-left bg-gray-700 border-gray-600 border-b-2 lg:text-xs font-bold text-white uppercase whitespace-pre">
+        {{'lastName' | translate}}
+      </th>
+      <th
+        class="px-6 py-3 text-left bg-gray-700 border-gray-600 border-b-2 lg:text-xs font-bold text-white uppercase whitespace-pre">
+        {{'playerNumber' | translate}}
+      </th>
+      <th
+        class="px-6 py-3 text-left bg-gray-700 border-gray-600 border-b-2 lg:text-xs font-bold text-white uppercase whitespace-pre">
+        {{'age' | translate}}
+      </th>
+      <th
+        class="px-6 py-3 text-left bg-gray-700 border-gray-600 border-b-2 lg:text-xs font-bold text-white uppercase whitespace-pre">
+        {{'teamName' | translate}}
+      </th>
+      <th
+        class="px-6 py-3 bg-gray-700 border-gray-600 lg:border-b-2 select-none rounded-bl-lg lg:rounded-bl-none lg:rounded-tr-lg">
+        &nbsp;
+      </th>
+    </tr>
+    </thead>
+    <tbody class="flex-1 lg:flex-none">
+    <tr *ngFor="let player of players" class="text-base flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0"
+        id="{{player.id}}">
+      <td
+        class="bg-gray-100 border-gray-400 border-b-2 px-6 py-3 whitespace-pre lg:whitespace-normal lg:break-words max-column-width rounded-tr-lg lg:rounded-none">{{player.firstName}}</td>
+      <td
+        class="bg-gray-100 border-gray-400 border-b-2 px-6 py-3 whitespace-pre lg:whitespace-normal lg:break-words max-column-width">{{player.lastName}}</td>
+      <td
+        class="bg-gray-100 border-gray-400 border-b-2 px-6 py-3 whitespace-pre lg:whitespace-normal lg:break-words">{{player.playerNumber}}</td>
+      <td
+        class="bg-gray-100 border-gray-400 border-b-2 px-6 py-3 whitespace-pre lg:whitespace-normal lg:break-words">{{player.age}}</td>
+      <td
+        class="bg-gray-100 border-gray-400 border-b-2 px-6 py-3 whitespace-pre lg:whitespace-normal lg:break-words">{{player.teamName == null ? '-' : player.teamName}}</td>
+      <td class="bg-gray-100 border-gray-400 lg:border-b-2 px-6 py-1 lg:py-2 rounded-br-lg lg:rounded-none">
+        <div class="w-24">
+          <button class="bg-blue-600 rounded-lg text-white mx-1 w-10 h-10" routerLink="/updatePlayer/{{player.id}}">
+            <i aria-hidden="true" class="fa fa-edit"></i>
+          </button>
+          <button class="bg-red-600 rounded-lg text-white mx-1 w-10 h-10" routerLink="/deletePlayer/{{player.id}}">
+            <i aria-hidden="true" class="fa fa-trash"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

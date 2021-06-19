@@ -1,0 +1,27 @@
+---
+name: Deploy on GitHub pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install 📥
+        run: npm install --force
+
+      - name: Build 🔧
+        run: npm run build -- --prod=true --base-href='/sportsclub-angular-frontend/'
+
+      - name: Redirect 404
+        run: cp dist/SportClubApp/index.html dist/SportClubApp/404.html
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist/SportClubApp
